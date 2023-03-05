@@ -1,0 +1,24 @@
+{
+  "name": "typescript-generics",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Seema Ullal <seemaullal@gmail.com>",
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^18.6.5",
+    "@types/react": "^18.0.27",
+    "chokidar": "^3.5.3",
+    "cross-fetch": "^3.1.5",
+    "typescript": "^4.8.3",
+    "vitest": "^0.21.1"
+  },
+  "scripts": {
+    "exercise": "node scripts/exercise.js",
+    "solution": "SOLUTION=true node scripts/exercise.js"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "fast-glob": "^3.2.12",
+    "ts-toolbelt": "^9.6.0"
+  }
+}
