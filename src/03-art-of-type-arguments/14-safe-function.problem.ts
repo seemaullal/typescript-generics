@@ -1,14 +1,44 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
+// my original solution
+// const makeSafe =
+//   <T extends Array<unknown>, R>(func: (...funcArgs: T) => R) =>
+//   (
+//     ...args: T
+//   ):
+//     | {
+//         type: "success";
+//         result: R;
+//       }
+//     | {
+//         type: "failure";
+//         error: Error;
+//       } => {
+//     try {
+//       const result = func(...args);
+
+//       return {
+//         type: "success",
+//         result,
+//       };
+//     } catch (e) {
+//       return {
+//         type: "failure",
+//         error: e as Error,
+//       };
+//     }
+//   };
+
+// alternative solution
 const makeSafe =
-  (func: unknown) =>
+  <TFunc extends (...args: any[]) => any>(func: TFunc) =>
   (
-    ...args: unknown
+    ...args: Parameters<TFunc>
   ):
     | {
         type: "success";
-        result: unknown;
+        result: ReturnType<TFunc>;
       }
     | {
         type: "failure";
