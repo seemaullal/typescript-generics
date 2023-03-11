@@ -5,7 +5,7 @@ export interface Cache<T> {
   get: (key: string) => T | undefined;
   set: (key: string, value: T) => void;
   // You can fix this by only changing the line below!
-  clone: <U>(transform: (elem: T) => U) => Cache<U>;
+
 }
 
 const createCache = <T>(initialCache?: Record<string, T>): Cache<T> => {
@@ -53,3 +53,4 @@ it("Should let you clone the cache using a transform function", () => {
 
   type tests = [Expect<Equal<typeof a, string | undefined>>];
 });
+clone: <U>(transform: (elem: T | undefined) => U) => Cache<U>;

@@ -4,8 +4,9 @@ import { Equal, Expect } from "../helpers/type-utils";
 export interface Cache<T> {
   get: (key: string) => T | undefined;
   set: (key: string, value: T) => void;
-  // You can fix this by only changing the line below!
-  clone: (transform: (elem: unknown) => unknown) => Cache<unknown>;
+  clone: <TFuncReturn>(
+    transform: (elem: T | undefined) => TFuncReturn,
+  ) => Cache<TFuncReturn>;
 }
 
 const createCache = <T>(initialCache?: Record<string, T>): Cache<T> => {
@@ -20,7 +21,9 @@ const createCache = <T>(initialCache?: Record<string, T>): Cache<T> => {
       const newCache: Record<string, any> = {};
 
       for (const key in cache) {
-        newCache[key] = transform(cache[key]);
+        if (key in cache) {
+          newCache[key] = transform(cache[key]);
+        }
       }
       return createCache(newCache);
     },
