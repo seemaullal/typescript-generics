@@ -1,13 +1,18 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
-/**
- * This time, let's try and solve this one
- * with function overloads too!
- */
-export const youSayGoodbyeISayHello = (greeting: "goodbye" | "hello") => {
+export function youSayGoodbyeISayHello(greeting: "goodbye"): "hello";
+export function youSayGoodbyeISayHello(greeting: "hello"): "goodbye";
+export function youSayGoodbyeISayHello(greeting: "goodbye" | "hello") {
   return greeting === "goodbye" ? "hello" : "goodbye";
-};
+}
+// export function youSayGoodbyeISayHello<TGreeting extends "hello" | "goodbye">(
+//   greeting: TGreeting,
+// ): TGreeting extends "goodbye" ? "hello" : "goodbye" {
+//   return (
+//     greeting === "goodbye" ? "hello" : "goodbye"
+//   ) as TGreeting extends "goodbye" ? "hello" : "goodbye";
+// }
 
 it("Should return goodbye when hello is passed in", () => {
   const result = youSayGoodbyeISayHello("hello");
